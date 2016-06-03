@@ -14,7 +14,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
-import org.openqa.selenium.Point;
+//import org.openqa.selenium.Point;
 //import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -277,7 +277,7 @@ public class WrapperMethods implements GenericWrappers {
 		boolean returnValue = false;
 		try {
 			element = driver.findElement(By.id(id));
-			int elementLoc = element.getLocation().x;
+			//int elementLoc = element.getLocation().x;
 			int locX = element.getLocation().x;
 			int locY = element.getLocation().y;
 			
@@ -689,4 +689,31 @@ public class WrapperMethods implements GenericWrappers {
 		return returnValue;
 	}
 	
+	public boolean clickByLinkSendKeys(String link) {
+		
+		boolean returnValue = false;
+		try {
+			element = driver.findElement(By.linkText(link));
+			
+			if(element.isDisplayed()){			
+				element.sendKeys(Keys.ENTER);
+				returnValue = true;
+				
+			} else{
+				System.out.println("Element with given id: "+link+" is not Visible");
+			}
+			
+		} catch(NoSuchElementException e){
+			
+			System.out.println("Element not found Exception : id - "+link);
+			
+		} catch(Exception e){
+			
+			System.out.println("Exception Encountered "+e);
+			
+		} finally{
+			captureScreen();
+		}
+		return returnValue;
+	}
 }
